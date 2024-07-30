@@ -1,0 +1,72 @@
+﻿@model SMS.Areas.Models.CourseActionViewModel
+
+
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+
+                @if (Model.Id > 0)
+                {
+                    <span>Edit Course</span>
+                }
+                else
+                {
+                    <span>Create Course</span>
+                }
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form id="actionForm">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="form-group">
+                    <label>Course_Name</label>
+                    <input class="form-control" name="Course_Name" placeholder="Enter Course_Name." value="@Model.Course_Name">
+                </div>
+                <div class="form-group">
+                    <label>Course_Description</label>
+                    <textarea class="form-control" name="Course_Description" placeholder="Enter Course_Description.">@Model.Course_Description</textarea>
+                </div>
+                <div class="form-group">
+                    <label>School_Year</label>
+                    <textarea class="form-control" name="School_Year" placeholder="Enter School_Year.">@Model.School_Year</textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="errorDiv">
+    </div>
+
+    <div>
+        <div class="modal-footer">
+            <button id="actionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i>Close</button>
+        </div>
+    </div>
+}
+
+<script>
+    $("#actionButton").click(function () {
+        $.ajax({
+            url: '@Url.Action("Action", "Course")',
+            type: "post",
+            data: $("#actionForm").serialize()
+        })
+        .done(function (response) {
+            if(response.Success)
+            {
+                location.reload();
+            }
+            else {
+                $(".errorDiv").html(response.Message);
+            }
+        });
+    });
+</script>
+
+

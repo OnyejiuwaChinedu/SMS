@@ -1,0 +1,64 @@
+﻿@model School_Management_System.Areas.Models.StaffListViewModel
+
+@if (Model != null && Model.Staffs != null && Model.Staffs.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Lastname</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Age</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Staffs != null)
+            {
+                foreach (var staff in Model.Staffs)
+                {
+                    <tr>
+                        <td>
+                            @staff.Lastname
+                        </td>
+                        <td>
+                            @staff.FirstName
+                        </td>
+                        <td>
+                            @staff.Gender
+                        </td>
+                        <td>
+                            @staff.Age
+                        </td>
+                        <td>
+                            @staff.Email
+                        </td>
+                        <td>
+                            @staff.Address
+                        </td>
+                        <td>
+                            @staff.Password
+                        </td>
+
+                        <td>
+                            <button data-href="@Url.Action("Action", "Staff", new { Id = staff.Id })" type="button" class="data-btn btn btn-success" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-pen mr-1"></i>Edit</button>
+                            <button data-href="@Url.Action("Delete", "Staff", new { Id = staff.Id })" type="button" class="data-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-trash-can mr-1"></i>Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+

@@ -1,0 +1,87 @@
+﻿@model SMS.Areas.Models.StaffActionViewModel
+
+
+@if (Model != null)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">
+
+                @if (Model.Id > 0)
+                {
+                    <span>Edit Staff</span>
+                }
+                else
+                {
+                    <span>Create Staff</span>
+                }
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="actionForm">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="form-group">
+                    <label>Lastname</label>
+                    <input class="form-control" name="Lastname" placeholder="Enter Staff Firstname." value="@Model.Lastname">
+                </div>
+                <div class="form-group">
+                    <label>FirstName</label>
+                    <textarea class="form-control" name="FirstName" placeholder="Enter Staff LastName.">@Model.FirstName</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <textarea class="form-control" name="Gender" placeholder="Enter Staff Gender.">@Model.Gender</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <textarea class="form-control" name="Age" placeholder="Enter Staff Age.">@Model.Age</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <textarea class="form-control" name="Email" placeholder="Enter Email.">@Model.Email</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea class="form-control" name="Address" placeholder="Enter Staff Address.">@Model.Address</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <textarea class="form-control" name="Expiry Date" placeholder="Enter Staff Password">@Model.Password</textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="errorDiv">
+    </div>
+
+    <div>
+        <div class="modal-footer">
+            <button id="actionButton" type="button" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i>Close</button>
+        </div>
+    </div>
+}
+
+<script>
+    $("#actionButton").click(function () {
+        $.ajax({
+            url: '@Url.Action("Action", "Staff")',
+            type: "post",
+            data: $("#actionForm").serialize()
+        })
+        .done(function (response) {
+            if(response.Success)
+            {
+                location.reload();
+            }
+            else {
+                $(".errorDiv").html(response.Message);
+            }
+        });
+    });
+</script>
+
+

@@ -1,0 +1,156 @@
+﻿@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.Title - School Management System</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    @*///css new*@
+    <link href="~/Areas/Admin/Content/css/styles.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/Vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    @*//css new*@
+    <link href="~/Areas/Dashboard/Content/Vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Dashboard/Content/css/styles.css" rel="stylesheet" />
+
+    <script src="https://kit.fontawesome.com/adf95bd522.js" crossorigin="anonymous"></script>
+    <script src="~/Areas/Dashboard/Content/Vendor/jquery/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <i class="fa fa-globe" aria-hidden="true"></i> School Management System
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("Index", "Student")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Students
+                </a>
+                <a href="@Url.Action("Index", "Staff")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Staffs
+                </a>
+                <a href="@Url.Action("Index", "Schedule")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Schedule
+                </a>
+                <a href="@Url.Action("Index", "Course")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Course
+                </a>
+                <a href="@Url.Action("Index", "Subject")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Subject
+                </a>
+                <a href="@Url.Action("Index", "Transaction")" class="list-group-item list-group-item-action bg-light">
+                    <i @*class="fa fa-cutlery"*@ aria-hidden="true"></i> Transaction
+                </a>
+
+            </div>
+        </div>
+
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">
+                                <i class="fa-solid fa-house-chimney"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
+                                <i class="fa-solid fa-right-from-bracket mr-1"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            @*Page content
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>*@
+
+            <!-- Page content-->
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    @*/wrapper
+        <script src="~/Areas/Admin/Content/vendor/js/bootstrap.bundle.min.js"></script>
+        Menu Toggle Script
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>*@
+    <!-- /wrapper -->
+    @*<script src="~/Areas/Admin/Content/vendor/js/bootstrap.bundle.min.js"></script>*@
+
+
+    <script src="~/Areas/Admin/Content/Vendor/js/bootstrap.bundle.min.js"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>
